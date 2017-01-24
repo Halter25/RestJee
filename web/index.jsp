@@ -34,7 +34,7 @@
     <div class="row">
 
         <c:import var="directors" url="http://localhost:8080/RestJee_war_exploded/rest/directors" charEncoding="UTF-8"/>
-        <x:parse xml="${directors}" var="output"/>
+        <x:parse xml="${directors}" var="output"/> <!-- TODO corriger url -->
         <c:import var="movies" url="http://localhost:8080/RestJee_war_exploded/rest/movies" charEncoding="UTF-8"/>
         <x:parse xml="${movies}" var="outputmovie"/>
 
