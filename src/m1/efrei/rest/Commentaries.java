@@ -6,12 +6,14 @@ package m1.efrei.rest;
 
 import m1.efrei.data.DataCommentary;
 import m1.efrei.model.Commentary;
+import m1.efrei.model.Movie;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 //Sets the path to base URL + /commentaries
@@ -24,17 +26,17 @@ public class Commentaries {
         return DataCommentary.getInstance();
     }
 
-    /* TODO Individuellement
-    @Path("{commentaries}") // Return a director by his ID
-    public Commentary getCommentary(@PathParam("commentaries") int id) {
-        for (Commentary d : DataCommentary.getInstance()) {
-            if (d.getId() == id) {
-                return d;
+    @GET
+    @Path("{id}") // Return a list of movie's commentaries by his ID
+    public List<Commentary> getMovieCommentaries(@PathParam("id") int id) {
+        ArrayList<Commentary> movieCommentaries = new ArrayList<>();
+        for (Commentary c : DataCommentary.getInstance()) {
+            if (c.getMovieId() == id) {
+                movieCommentaries.add(c);
             }
         }
-        return null;
+        return (movieCommentaries.size() > 0) ? movieCommentaries : null;
     }
-    */
 
     @POST
     @Produces(MediaType.TEXT_HTML)

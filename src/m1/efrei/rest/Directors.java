@@ -5,13 +5,16 @@
 package m1.efrei.rest;
 
 import m1.efrei.data.DataDirector;
+import m1.efrei.data.DataMovie;
 import m1.efrei.model.Director;
+import m1.efrei.model.Movie;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 //Sets the path to base URL + /directors
@@ -24,17 +27,29 @@ public class Directors {
         return DataDirector.getInstance();
     }
 
-    /* TODO Individuellement
-    @Path("{directors}") // Return a director by his ID
-    public Director getDirector(@PathParam("directors") int id) {
+    @GET
+    @Path("{id}") // Return details of a director by his ID
+    public List<Director> getDirectorDetail(@PathParam("id") int id) {
+        ArrayList<Director> directorDetail = new ArrayList<>();
         for (Director d : DataDirector.getInstance()) {
             if (d.getId() == id) {
-                return d;
+                directorDetail.add(d);
             }
         }
-        return null;
+        return (directorDetail.size() > 0) ? directorDetail : null;
     }
-    */
+
+    @GET
+    @Path("{id}/movies") // Return details of a director by his ID
+    public List<Movie> getDirectorMovies(@PathParam("id") int id) {
+        ArrayList<Movie> directorMovies = new ArrayList<>();
+        for (Movie m : DataMovie.getInstance()) {
+            if (m.getDirectorId() == id) {
+                directorMovies.add(m);
+            }
+        }
+        return (directorMovies.size() > 0) ? directorMovies : null;
+    }
 
     @POST
     @Produces(MediaType.TEXT_HTML)

@@ -12,6 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 //Sets the path to base URL + /movies
@@ -24,17 +25,28 @@ public class Movies {
         return DataMovie.getInstance();
     }
 
-    /* TODO Individuellement
-    @Path("{movies}") // Return a director by his ID
-    public Movie getMovie(@PathParam("movies") int id) {
-        for (Movie d : DataMovie.getInstance()) {
-            if (d.getId() == id) {
-                return d;
+    @GET
+    @Path("{year}") // Return a list of movie by the year
+    public List<Movie> getYearMovies(@PathParam("year") int year) {
+        ArrayList<Movie> yearMovies = new ArrayList<>();
+        for (Movie m : DataMovie.getInstance()) {
+            if (m.getYear() == year) {
+                yearMovies.add(m);
+            }
+        }
+        return (yearMovies.size() > 0) ? yearMovies : null;
+    }
+
+    @GET
+    @Path("{year}/laureate") // Return the laureate of the asked year
+    public Movie getYearLaureate(@PathParam("year") int year) {
+        for (Movie m : DataMovie.getInstance()) {
+            if (m.getYear() == year && m.isLaureate()) {
+                return m;
             }
         }
         return null;
     }
-    */
 
     @POST
     @Produces(MediaType.TEXT_HTML)
