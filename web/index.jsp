@@ -37,7 +37,7 @@
     <input id="year" name="year"/>
     <br/>
     <label for="laureate"> Laureate </label>
-    <input type="checkbox" id="laureate" value="true">
+    <input type="checkbox" id="laureate" name="laureate" value="true">
     <br/>
     <input type="submit" value="Submit"/>
 </form>
