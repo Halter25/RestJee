@@ -35,7 +35,7 @@ public class Commentaries {
                 movieCommentaries.add(c);
             }
         }
-        return (movieCommentaries.size() > 0) ? movieCommentaries : null;
+        return movieCommentaries;
     }
 
     @POST
@@ -57,6 +57,6 @@ public class Commentaries {
         c.setContent(content);
 
         DataCommentary.add(c);
-        servletResponse.sendRedirect("http://localhost:8080/RestJee_war_exploded/"); // TODO change url
+        servletResponse.sendRedirect("./..");
     }
 }

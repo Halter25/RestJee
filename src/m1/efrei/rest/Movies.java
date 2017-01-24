@@ -34,18 +34,19 @@ public class Movies {
                 yearMovies.add(m);
             }
         }
-        return (yearMovies.size() > 0) ? yearMovies : null;
+        return yearMovies;
     }
 
     @GET
     @Path("{year}/laureate") // Return the laureate of the asked year
-    public Movie getYearLaureate(@PathParam("year") int year) {
+    public List<Movie> getYearLaureate(@PathParam("year") int year) {
+        ArrayList<Movie> yearMoviesLaureate = new ArrayList<>();
         for (Movie m : DataMovie.getInstance()) {
             if (m.getYear() == year && m.isLaureate()) {
-                return m;
+                return yearMoviesLaureate;
             }
         }
-        return null;
+        return yearMoviesLaureate;
     }
 
     @POST
@@ -68,6 +69,6 @@ public class Movies {
         m.setLaureate(laureate);
 
         DataMovie.add(m);
-        servletResponse.sendRedirect("http://localhost:8080/RestJee_war_exploded/"); // TODO change url
+        servletResponse.sendRedirect("./..");
     }
 }

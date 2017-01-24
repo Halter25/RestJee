@@ -14,7 +14,7 @@
 <body>
 <!-- DIRECTORS -->
 <h3>Add Director</h3>
-<form action="http://localhost:8080/RestJee_war_exploded/rest/directors" method="POST"> <!-- TODO change URL -->
+<form action="./rest/directors" method="POST">
     <label for="firstName">First Name</label>
     <input id="firstName" name="firstName"/>
     <br/>
@@ -26,7 +26,7 @@
 <hr>
 <!-- MOVIES -->
 <h3>Add Movie</h3>
-<form action="http://localhost:8080/RestJee_war_exploded/rest/movies" method="POST"> <!-- TODO change URL -->
+<form action="./rest/movies" method="POST">
     <label for="title">Title</label>
     <input id="title" name="title"/>
     <br/>
@@ -44,7 +44,7 @@
 <hr>
 <!-- COMMENTARIES -->
 <h3>Add Commentary</h3>
-<form action="http://localhost:8080/RestJee_war_exploded/rest/commentaries" method="POST"> <!-- TODO change URL -->
+<form action="./rest/commentaries" method="POST">
     <label for="movieId">Movie Id</label> <!-- TODO Menu déroulant des films -->
     <input id="movieId" name="movieId"/>
     <br/>

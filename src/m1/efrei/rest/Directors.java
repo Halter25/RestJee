@@ -48,7 +48,7 @@ public class Directors {
                 directorMovies.add(m);
             }
         }
-        return (directorMovies.size() > 0) ? directorMovies : null;
+        return directorMovies;
     }
 
     @POST
@@ -68,6 +68,6 @@ public class Directors {
         d.setId(i);
 
         DataDirector.add(d);
-        servletResponse.sendRedirect("http://localhost:8080/RestJee_war_exploded/"); // TODO change url
+        servletResponse.sendRedirect("./..");
     }
 }
