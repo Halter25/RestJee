@@ -4,52 +4,58 @@
  */
 package m1.efrei.rest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import m1.efrei.data.DataMovie;
+import m1.efrei.model.Movie;
 
-//Sets the path to base URL + /hello
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.List;
+
+//Sets the path to base URL + /movies
 @Path("/movies")
 public class Movies {
 
-    // This method is called the XML request
-    @GET
+    @GET // Return the full list
     @Produces(MediaType.TEXT_XML)
-    public String moviesList() {
-
-        Connection connec;
-        Statement stmt = null;
-        ResultSet result = null;
-
-        try {
-            // CONNECT to the database
-            Class.forName("org.hsqldb.jdbc.JDBCDriver");
-            connec = DriverManager.getConnection("jdbc:hsqldb:file:L:/Java/RestJee/HSQLDB/", "root", "root");
-            stmt = connec.createStatement();
-
-            // READ into the database
-            result = stmt.executeQuery("SELECT * FROM MOVIES");
-            connec.close();
-
-            // CONVERT to xml format
-            while (result.next()) {
-                // TODO Parse to XML
-                System.out.println(result.getInt("ID") + " | " +
-                        result.getString("TITLE") + " | " +
-                        result.getInt("YEAR")
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-        }
-
-        // SEND the XML
-        return "<?xml version=\"1.0\"?>" + "<hello> QUOI?" + "</hello>";
+    public List<Movie> MoviesList() {
+        return DataMovie.getInstance();
     }
 
+    /* TODO Individuellement
+    @Path("{movies}") // Return a director by his ID
+    public Movie getMovie(@PathParam("movies") int id) {
+        for (Movie d : DataMovie.getInstance()) {
+            if (d.getId() == id) {
+                return d;
+            }
+        }
+        return null;
+    }
+    */
+
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void newMovie(@FormParam("title") String title, @FormParam("directorId") int directorId,
+                         @FormParam("year") int year, @FormParam("laureate") boolean laureate,
+                         @Context HttpServletResponse servletResponse) throws IOException {
+
+        int i = 0;
+        for (Movie mov : DataMovie.getInstance()) {
+            if (mov.getId() == i) i++;
+        }
+
+        Movie m = new Movie();
+        m.setId(i);
+        m.setTitle(title);
+        m.setDirectorId(directorId);
+        m.setYear(year);
+        m.setLaureate(laureate); // TODO Fix le probleme. La valeur n'est pas sauvegardé
+
+        DataMovie.add(m);
+        servletResponse.sendRedirect("http://localhost:8080/RestJee_war_exploded/"); // TODO change url
+    }
 }
