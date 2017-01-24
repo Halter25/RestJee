@@ -1,8 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
-/.idea/
 *.iws
 /out/
-/lib/
 .idea_modules/
 atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml

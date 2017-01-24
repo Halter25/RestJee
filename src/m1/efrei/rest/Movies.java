@@ -52,7 +52,7 @@ public class Movies {
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void newMovie(@FormParam("title") String title, @FormParam("directorId") int directorId,
-                         @FormParam("year") int year, @FormParam("laureate") boolean laureate,
+                         @FormParam("year") int year, @FormParam("laureate") int laureate,
                          @Context HttpServletResponse servletResponse) throws IOException {
 
         int i = 0;
@@ -60,12 +60,13 @@ public class Movies {
             if (mov.getId() == i) i++;
         }
 
+        boolean lau = (laureate != 0);
         Movie m = new Movie();
         m.setId(i);
         m.setTitle(title);
         m.setDirectorId(directorId);
         m.setYear(year);
-        m.setLaureate(laureate); // TODO Fix le probleme. La valeur n'est pas sauvegardé
+        m.setLaureate(lau); // TODO Fix le probleme. La valeur n'est pas sauvegardé
 
         DataMovie.add(m);
         servletResponse.sendRedirect("http://localhost:8080/RestJee_war_exploded/"); // TODO change url
