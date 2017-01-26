@@ -1,0 +1,14 @@
+body {
+    background-color: lightblue;
+    margin: 0 30px 30px 30px;
+}
+
+.block {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: snow;
+}
+
+.input-field label {
+    color: #000;
+}	
