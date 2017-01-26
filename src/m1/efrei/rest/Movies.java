@@ -43,7 +43,8 @@ public class Movies {
         ArrayList<Movie> yearMoviesLaureate = new ArrayList<>();
         for (Movie m : DataMovie.getInstance()) {
             if (m.getYear() == year && m.isLaureate()) {
-                return yearMoviesLaureate;
+            	yearMoviesLaureate.add(m);
+            	return yearMoviesLaureate;
             }
         }
         return yearMoviesLaureate;

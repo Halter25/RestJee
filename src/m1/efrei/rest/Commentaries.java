@@ -6,7 +6,6 @@ package m1.efrei.rest;
 
 import m1.efrei.data.DataCommentary;
 import m1.efrei.model.Commentary;
-import m1.efrei.model.Movie;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
